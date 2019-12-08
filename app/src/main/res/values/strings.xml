@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PlanningPokerProjectUser</string>
+    <string name="login_text">User Login</string>
+    <string name="register_text">Register</string>
+    <string name="loginName">Name</string>
+    <string name="loginPassword">Password</string>
+    <string name="createRoom">Create Room</string>
+    <string name="roomID">Room ID</string>
+    <string name="roomPassword">Room Password</string>
+    <string name="roomJoin">Join Room</string>
+    <string name="myrooms">My Rooms</string>
+</resources>
