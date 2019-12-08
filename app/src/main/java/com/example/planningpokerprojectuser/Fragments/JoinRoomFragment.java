@@ -51,7 +51,7 @@ public class JoinRoomFragment extends Fragment {
         initialization(view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         listing = new ArrayList<Question>();
-
+int i=1;
         myRef = FirebaseDatabase.getInstance().getReference("Admins").child("roland");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
