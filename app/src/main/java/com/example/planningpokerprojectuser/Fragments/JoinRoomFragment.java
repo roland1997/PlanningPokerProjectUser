@@ -133,6 +133,7 @@ public class JoinRoomFragment extends Fragment {
                                                     String number = "1";
 
                                                     myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                    Toast.makeText(getContext(),"Your vote is: " + number +"Please dont vote again!!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }
@@ -143,6 +144,7 @@ public class JoinRoomFragment extends Fragment {
                                                     String number = "2";
 
                                                     myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                    Toast.makeText(getContext(),"Your vote is: " + number +"Please dont vote again!!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }
@@ -153,6 +155,7 @@ public class JoinRoomFragment extends Fragment {
                                                     String number = "2";
 
                                                     myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                    Toast.makeText(getContext(),"Your vote is: " + number +"Please dont vote again!!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }
@@ -163,6 +166,7 @@ public class JoinRoomFragment extends Fragment {
                                                     String number = "2";
 
                                                     myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                    Toast.makeText(getContext(),"Your vote is: " + number +"Please dont vote again!!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }
@@ -173,6 +177,7 @@ public class JoinRoomFragment extends Fragment {
                                                     String number = "2";
 
                                                     myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                    Toast.makeText(getContext(),"Your vote is: " + number +"Please dont vote again!!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }
