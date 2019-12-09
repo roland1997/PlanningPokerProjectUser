@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.planningpokerprojectuser.Objects.Activ;
 import com.example.planningpokerprojectuser.Objects.MyAdapter;
 import com.example.planningpokerprojectuser.Objects.Question;
 import com.example.planningpokerprojectuser.R;
@@ -29,12 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class JoinRoomFragment extends Fragment {
@@ -46,22 +39,22 @@ public class JoinRoomFragment extends Fragment {
     private static final String USERNAME= "userName";
     private DatabaseReference myRef;
     private FirebaseDatabase database;
-    private RecyclerView recyclerView;
     private ArrayList<Question> listing;
-    private MyAdapter adapter;
-    private String activated ="";
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_join_room,container, false);
 
-
         initialization(view);
+        join(view);
 
+        return view;
+    }
 
-
-
+    //csatlakozas a szobahoz
+    private void join (final View view){
         rJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,16 +65,20 @@ public class JoinRoomFragment extends Fragment {
                 Log.d("alma1",ID);
                 Log.d("alma2",Password);
 
-                checkID();
-                list(view);
+                if(!ID.isEmpty() && !Password.isEmpty()){
+                    checkID();
+                    list();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "Room ID os Password is empty", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
-
-
-
-        return view;
     }
 
+    //user elmentese
     @SuppressLint("CommitPrefEdits")
     private void joinQuestion(){
 
@@ -91,8 +88,8 @@ public class JoinRoomFragment extends Fragment {
             myRef.child("Users").child(username).child(ID).setValue("");
         }
     }
-
-    private void list(final View view){
+    //Aktivalt kerdes kiirasa es lehetoseg a szavazasra
+    private void list(){
 
         listing = new ArrayList<Question>();
 
@@ -102,7 +99,6 @@ public class JoinRoomFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
-                    Activ activ = new Activ();
                     Log.d("listazas", String.valueOf(i));
 
                     if(i.getKey().equals("Question")){
@@ -114,10 +110,6 @@ public class JoinRoomFragment extends Fragment {
                                     final String quest=j.getKey();
 
                                     questionShow.setText(quest);
-
-
-
-
 
                                     Log.d("activated2","igen");
                                     for(final DataSnapshot k: j.getChildren()) {
@@ -206,6 +198,7 @@ public class JoinRoomFragment extends Fragment {
         });
     }
 
+    //szoba id es password ellenorzese
     private void checkID(){
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Groups");
@@ -232,8 +225,7 @@ public class JoinRoomFragment extends Fragment {
 
     }
 
-
-
+    //initializalas
     private void initialization(View view){
         rID = view.findViewById(R.id.roomID);
         rPassword = view.findViewById(R.id.roomPassword);
@@ -251,6 +243,7 @@ public class JoinRoomFragment extends Fragment {
 
     }
 
+    //username atvetele a login reszbol
     public static JoinRoomFragment newInstance(String text) {
         JoinRoomFragment fragment = new JoinRoomFragment();
         Bundle args = new Bundle();

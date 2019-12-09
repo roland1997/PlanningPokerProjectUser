@@ -1,4 +1,4 @@
-package com.example.planningpokerprojectuser;
+package com.example.planningpokerprojectuser.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.planningpokerprojectuser.Fragments.LoginFragment;
+import com.example.planningpokerprojectuser.R;
 
 public class MainActivity extends AppCompatActivity {
 

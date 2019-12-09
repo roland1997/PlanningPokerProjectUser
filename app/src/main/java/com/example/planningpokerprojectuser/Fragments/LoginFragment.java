@@ -43,18 +43,15 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login,container, false);
 
         initialization(view);
-    getPrefernces();
+        getPrefernces();
+        login();
+        register();
 
+        return view;
+    }
 
-        lRegisterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fr=getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container,new RegisterFragment());
-                fr.commit();
-            }
-        });
-
+    // beleptet az alkalmazasba
+    private void login(){
         lLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,11 +64,21 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
-
-        return view;
     }
 
+    //atdob a regisztraciohoz
+    private void register(){
+        lRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr=getFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container,new RegisterFragment());
+                fr.commit();
+            }
+        });
+    }
+
+    // megnezi ha helyesen irta be a felhasznalonevet es jelszot
     private void userCheck(final String username){
         // Read from the database
         database = FirebaseDatabase.getInstance();
@@ -106,6 +113,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
+    // inicializalas
     private void initialization (View view){
         lLoginButton = view.findViewById(R.id.lLoginButton);
         lRegisterButton = view.findViewById(R.id.lRegisterButton);
@@ -116,6 +124,8 @@ public class LoginFragment extends Fragment {
 
 
     }
+
+    //Vissza rakja az elmentett adatokat az EditTextbe
     private void getPrefernces(){
         SharedPreferences sp =this.getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 
@@ -130,6 +140,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    //Elmenti a bejeletkezett felhasznalot hogy ne kelljen ujra beirja az adatait
     private void saveElement(){
         SharedPreferences sp =this.getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 

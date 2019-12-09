@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.planningpokerprojectuser.Fragments.LoginFragment;
 import com.example.planningpokerprojectuser.R;
@@ -29,27 +30,32 @@ public class RegisterFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstace){
         View view = inflater.inflate(R.layout.fragment_register1,container, false);
 
-
-
         initialization(view);
+        register();
 
+        return view;
+    }
+
+    private void register(){
         rRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username = rUserName.getText().toString();
                 password = rPassword.getText().toString();
 
-                registerToDatabase();
-
-                FragmentTransaction fr=getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container,new LoginFragment());
-                fr.commit();
+                if(!username.isEmpty() && !password.isEmpty()){
+                    registerToDatabase();
+                    FragmentTransaction fr=getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container,new LoginFragment());
+                    fr.commit();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "Username or Password is empty", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
-
-
-        return view;
     }
 
     private void registerToDatabase(){

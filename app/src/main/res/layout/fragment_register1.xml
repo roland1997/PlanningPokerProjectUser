@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.RegisterFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/hatter"
         android:orientation="vertical">
 
         <TextView
@@ -14,25 +16,32 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:gravity="center"
-            android:text="@string/register_text" />
+            android:text="@string/register_text"
+            android:textColor="@color/feher"
+            android:textColorHint="@color/feher"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/rRegisterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_marginTop="20dp"
+            android:ems="10"
             android:hint="@string/loginName"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/feher"
+            android:textColorHint="@color/feher" />
 
         <EditText
             android:id="@+id/rRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_marginTop="5dp"
+            android:ems="10"
             android:hint="@string/loginPassword"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/feher"
+            android:textColorHint="@color/feher" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,15 +49,14 @@
             android:orientation="horizontal">
 
 
-
             <Button
                 android:id="@+id/rRegisterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:text="@string/register_text" />
         </LinearLayout>
     </LinearLayout>
