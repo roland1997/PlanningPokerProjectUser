@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.planningpokerprojectuser.Objects.Activ;
 import com.example.planningpokerprojectuser.Objects.MyAdapter;
 import com.example.planningpokerprojectuser.Objects.Question;
 import com.example.planningpokerprojectuser.R;
@@ -27,13 +29,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class JoinRoomFragment extends Fragment {
 
     private EditText rID,rPassword;
-    private Button rCreate;
+    private TextView questionShow;
+    private Button rJoin,one,two,three,four,five;
     private String ID,Password,username;
     private static final String USERNAME= "userName";
     private DatabaseReference myRef;
@@ -41,6 +49,7 @@ public class JoinRoomFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Question> listing;
     private MyAdapter adapter;
+    private String activated ="";
 
 
     @Override
@@ -49,47 +58,11 @@ public class JoinRoomFragment extends Fragment {
 
 
         initialization(view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        listing = new ArrayList<Question>();
-int i=1;
-        myRef = FirebaseDatabase.getInstance().getReference("Admins").child("roland");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot i: dataSnapshot.getChildren()){
-                    Question  newQestion = null;
-                    Question question = new Question();
-                    if(!i.getKey().equals("Password")) {
-                        question.setQuestionID(i.getKey());
-
-                    }
-                    for(DataSnapshot j: i.getChildren()) {
-                        if(!j.getKey().equals("Question")){
-                            question.setQuestionPASS(j.getValue().toString());
-                            newQestion.setQuestionPASS(j.getValue().toString());
-                        }
-                        for (DataSnapshot k : j.getChildren()) {
-
-                            question.setQuestion(k.getKey());
-                            newQestion =new Question(question.getQuestionID(),question.getQuestion());
-                            listing.add(newQestion);
-                        }
-                    }
-                }
-                adapter = new MyAdapter(view.getContext(),listing);
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
 
-        rCreate.setOnClickListener(new View.OnClickListener() {
+
+        rJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -100,7 +73,7 @@ int i=1;
                 Log.d("alma2",Password);
 
                 checkID();
-
+                list(view);
             }
         });
 
@@ -117,6 +90,120 @@ int i=1;
         if (username != null) {
             myRef.child("Users").child(username).child(ID).setValue("");
         }
+    }
+
+    private void list(final View view){
+
+        listing = new ArrayList<Question>();
+
+        myRef = FirebaseDatabase.getInstance().getReference("Groups").child(ID);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    Activ activ = new Activ();
+                    Log.d("listazas", String.valueOf(i));
+
+                    if(i.getKey().equals("Question")){
+                        Log.d("question",i.getKey());
+
+                        for(DataSnapshot j: i.getChildren()) {
+
+                                if(!i.getKey().equals(j.getKey())){
+                                    final String quest=j.getKey();
+
+                                    questionShow.setText(quest);
+
+
+
+
+
+                                    Log.d("activated2","igen");
+                                    for(final DataSnapshot k: j.getChildren()) {
+                                        final String user=k.getValue().toString();
+                                        if(k.getKey().equals("1")) {
+    /*
+                                        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatTime = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
+                                        Calendar c = Calendar.getInstance();
+                                        try {
+                                            Date expireDate = formatTime.parse(k.getValue().toString());
+                                            Log.d("ido",expireDate.toString());
+                                            String currentTime = formatTime.format(c.getTime());
+                                            Log.d("ido",currentTime);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+    */
+                                            one.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String number = "1";
+
+                                                    myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                }
+                                            });
+                                        }
+                                        if(k.getKey().equals("2")) {
+                                            two.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String number = "2";
+
+                                                    myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                }
+                                            });
+                                        }
+                                        if(k.getKey().equals("3")) {
+                                            three.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String number = "2";
+
+                                                    myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                }
+                                            });
+                                        }
+                                        if(k.getKey().equals("4")) {
+                                            four.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String number = "2";
+
+                                                    myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                }
+                                            });
+                                        }
+                                        if(k.getKey().equals("5")) {
+                                            five.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String number = "2";
+
+                                                    myRef.child("Groups").child(ID).child("Question").child(quest).child(number).setValue(user + ", " + username);
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                                else{
+
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void checkID(){
@@ -150,10 +237,13 @@ int i=1;
     private void initialization(View view){
         rID = view.findViewById(R.id.roomID);
         rPassword = view.findViewById(R.id.roomPassword);
-        rCreate = view.findViewById(R.id.buttonRoomCreate);
-       // list = view.findViewById(R.id.room_list);
-        recyclerView = view.findViewById(R.id.room_list);
-
+        rJoin = view.findViewById(R.id.buttonJoinRoom);
+        one = view.findViewById((R.id.button1));
+        two = view.findViewById((R.id.button2));
+        three = view.findViewById((R.id.button3));
+        four = view.findViewById((R.id.button4));
+        five = view.findViewById((R.id.button5));
+        questionShow = view.findViewById(R.id.questionLabel);
 
         if (getArguments() != null) {
             username = getArguments().getString(USERNAME);

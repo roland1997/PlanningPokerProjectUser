@@ -14,7 +14,7 @@
             android:id="@+id/createRoom"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/createRoom"
             app:layout_constraintEnd_toStartOf="parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/roomID"
             android:inputType="textPersonName"
@@ -37,7 +37,7 @@
             android:id="@+id/roomPassword"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
@@ -47,10 +47,10 @@
             app:layout_constraintTop_toBottomOf="@+id/createRoom" />
 
         <Button
-            android:id="@+id/buttonRoomCreate"
+            android:id="@+id/buttonJoinRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/roomJoin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,42 +60,74 @@
             android:id="@+id/split"
             android:layout_width="wrap_content"
             android:layout_height="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:background="#3F51B5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonRoomCreate" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonJoinRoom" />
 
         <TextView
-            android:id="@+id/myRooms"
+            android:id="@+id/questionLabel"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="center"
-            android:text="@string/myrooms"
+            android:hint="@string/questionLabel"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/split" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/room_list"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myRooms" />
+            app:layout_constraintTop_toBottomOf="@+id/questionLabel">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/one" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/two" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/three" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/four" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/five" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

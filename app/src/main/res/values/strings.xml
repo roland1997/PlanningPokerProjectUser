@@ -8,5 +8,10 @@
     <string name="roomID">Room ID</string>
     <string name="roomPassword">Room Password</string>
     <string name="roomJoin">Join Room</string>
-    <string name="myrooms">My Rooms</string>
+    <string name="questionLabel">Question will be here</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
 </resources>
