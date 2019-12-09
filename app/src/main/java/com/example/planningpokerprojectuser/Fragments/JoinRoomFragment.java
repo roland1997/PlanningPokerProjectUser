@@ -40,6 +40,7 @@ public class JoinRoomFragment extends Fragment {
     private DatabaseReference myRef;
     private FirebaseDatabase database;
     private ArrayList<Question> listing;
+    String quest;
 
 
 
@@ -93,6 +94,7 @@ public class JoinRoomFragment extends Fragment {
 
         listing = new ArrayList<Question>();
 
+
         myRef = FirebaseDatabase.getInstance().getReference("Groups").child(ID);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,19 +103,27 @@ public class JoinRoomFragment extends Fragment {
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
                     Log.d("listazas", String.valueOf(i));
 
+                    if("Activated".equals(i.getKey())){
+                       // questionShow.setText(i.getValue().toString());
+                          quest=i.getValue().toString();
+                    }
+
                     if(i.getKey().equals("Question")){
                         Log.d("question",i.getKey());
 
                         for(DataSnapshot j: i.getChildren()) {
 
-                                if(!i.getKey().equals(j.getKey())){
-                                    final String quest=j.getKey();
+                                if(!i.getValue().toString().equals(j.getKey())){
+
 
                                     questionShow.setText(quest);
 
+
                                     Log.d("activated2","igen");
                                     for(final DataSnapshot k: j.getChildren()) {
+
                                         final String user=k.getValue().toString();
+
                                         if(k.getKey().equals("1")) {
     /*
                                         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatTime = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
@@ -190,6 +200,7 @@ public class JoinRoomFragment extends Fragment {
 
 
                         }
+
                     }
                 }
 
